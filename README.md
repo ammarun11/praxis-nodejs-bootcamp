@@ -1,2 +1,3 @@
 ##### Belajar NodeJS Di Praxis ACADEMY 
-- Semangat !!
+- Day3 & Taks 
+- Fungsi, Route, Array, module, li & object
