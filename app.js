@@ -98,14 +98,20 @@ app.get("/example-4", (req, res) => {
 
 app.get('/taks-1', (req, res) => {
     let data = ["Beta", "Delta", "Alpha", "Cinta"]
+    console.log ("before", data)
+
     let result = tugas_lib.urutan(data)
+    console.log ("after", data)
 
     return res.send(result)
 })
 
 app.get('/taks-2', (req, res) => {
-    let data = ["Alpha", "Beta", "Cinta", "Delta"]
+    let data = ["Beta", "Delta", "Alpha", "Cinta"]
+    console.log ("before", data)
+
     let result = tugas_lib.dibalik(data)
+    console.log ("after", data)
 
     return res.send(result)
 })
