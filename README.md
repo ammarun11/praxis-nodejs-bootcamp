@@ -1,3 +1,3 @@
 ##### Belajar NodeJS Di Praxis ACADEMY 
-- Day6 & Latihan 
-- Database MongoDB, CREATE, fungsi
+- Day7 & Task 
+- Database MongoDB, CREATE, READ, Dengan Kondisi, Asynchronus/Await, Promise, Callback.
