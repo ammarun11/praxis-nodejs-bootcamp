@@ -5,7 +5,7 @@ class ShowShop {
         this.id = id
     }
 
-    async exec() {
+    async show() {
         try {
             let query = await Shop.findOne({
                 _id: this.id
