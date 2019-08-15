@@ -1,3 +1,3 @@
 ##### Belajar NodeJS Di Praxis ACADEMY 
-- Day8 & Task 
-- Database MongoDB, Gaw CRUD
+- Day9
+- Database MongoDB, CRUD, dengan class, 1 file 1 function CRUD 
