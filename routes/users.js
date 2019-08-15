@@ -1,12 +1,20 @@
 const express = require('express')
 const router = express.Router()
-const { create, getAll, getDetail } = require("../actions/users")
-const { isString } = require("lodash")
+const {
+    create,
+    getAll,
+    getDetail,
+    update,
+    destroy
+} = require("../actions/users")
+const {
+    isString
+} = require("lodash")
 
 router.post("/", async (req, res) => {
-    let data =  await create(req)
+    let data = await create(req)
 
-    if(isString(data) === true) {
+    if (isString(data) === true) {
         return res.status(400).json({
             status: "error",
             message: data
@@ -46,7 +54,7 @@ router.get("/", async (req, res) => {
             data,
             message: "Get all user data"
         })
-    } catch(err) {
+    } catch (err) {
         return res.status(400).json({
             status: "error",
             message: err.message
@@ -56,7 +64,9 @@ router.get("/", async (req, res) => {
 
 router.get("/:id", async (req, res) => {
     try {
-        let { id } = req.params
+        let {
+            id
+        } = req.params
         let data = await getDetail(id)
 
         return res.status(200).json({
@@ -64,7 +74,52 @@ router.get("/:id", async (req, res) => {
             data,
             message: "Get user detail successfully!"
         })
-    } catch(err) {
+    } catch (err) {
+        return res.status(400).json({
+            status: "error",
+            message: err.message
+        })
+    }
+})
+
+router.put("/:id", async (req, res) => {
+    let {
+        id
+    } = req.params
+    let updated_data = {
+        name: req.body.name,
+        email: req.body.email,
+        phone: req.body.phone,
+        fresh: req.body.fresh
+    }
+    try {
+        let data = await update(id, updated_data)
+
+        return res.status(200).json({
+            status: "success",
+            data,
+            message: "User data updated successfully!"
+        })
+    } catch (err) {
+        return res.status(400).json({
+            status: "error",
+            message: err.message
+        })
+    }
+})
+
+router.delete("/:id", async (req, res) => {
+    let { id } = req.params
+
+    try {
+        let data = await destroy(id)
+
+        return res.status(200).json({
+            status: "success",
+            data,
+            message: "User data deleted successfully!"
+        })
+    } catch (err) {
         return res.status(400).json({
             status: "error",
             message: err.message

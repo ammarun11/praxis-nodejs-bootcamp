@@ -1,26 +1,28 @@
 const User = require("../models/user")
-const {isInteger, isString} = require("lodash")
+const {
+    isInteger,
+    isString
+} = require("lodash")
 
 const create = async (req) => {
     let {
         name,
         phone
     } = req.body
-    
+
     let email = req.body.email.toLowerCase()
 
     phone = parseInt(phone)
-    
-    if (name == parseInt(name)){
+
+    if (name == parseInt(name)) {
         return "wrong type of name"
     }
     console.log(typeof name)
     console.log(typeof phone)
-    
-    if(isInteger(phone) === false) {
+
+    if (isInteger(phone) === false) {
         return "Wrong type of phone"
-    }
-    else if(isString(name) === false) {
+    } else if (isString(name) === false) {
         return "Wrong type of name"
     }
 
@@ -31,7 +33,7 @@ const create = async (req) => {
     }
 
     let data = new User(insert_data)
-    
+
     try {
         await data.save()
 
@@ -69,8 +71,48 @@ const getDetail = async (id) => {
     }
 }
 
+const update = async (id, updated_data) => {
+    let {
+        name,
+        email,
+        phone,
+        fresh
+    } = updated_data
+    let opts = { new: fresh === "true" ? true : false }
+
+    let data = {
+        name,
+        email,
+        phone
+    }
+
+    try {
+        let query = await User.findOneAndUpdate({
+            _id: id
+        }, data, opts).exec()
+
+        return query
+    } catch (err) {
+        throw err
+    }
+}
+
+const destroy = async (id) => {
+    try {
+        let query = await User.findByIdAndDelete({
+            _id: id
+        }).exec()
+
+        return query
+    } catch (err) {
+        throw err
+    }
+}
+
 module.exports = {
     create,
     getAll,
-    getDetail
+    getDetail,
+    update,
+    destroy
 }
