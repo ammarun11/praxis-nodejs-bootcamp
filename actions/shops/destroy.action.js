@@ -1,21 +1,21 @@
 const Shop = require("../../models/shop.model")
 
-class ShowShop {
+class DeleteShop {
     constructor(id) {
         this.id = id
     }
 
-    async exec() {
+    async delete() {
         try {
-            let query = await Shop.findOne({
+            let query = await Shop.findOneAndDelete({
                 _id: this.id
             }).exec()
-
+            
             return query
-        } catch(err) {
-            throw err
+        } catch (err) {
+        throw err
         }
     }
 }
 
-module.exports = ShowShop
+module.exports = DeleteShop

@@ -1,19 +1,24 @@
+/**
+ *  User Schema
+ */
+
 const mongoose = require("mongoose")
 const Schema = mongoose.Schema
 
-let ShopSchema = new Schema ({
+let shopSchema = new Schema({
     name: String,
     description: String,
     owner: String,
     created_at: {
-        type : Date, default: Date.now()
+        type: Date,
+        default: Date.now()
     },
-    created_at: {
-        type : Date, default: Date.now()
+    updated_at: {
+        type: Date,
+        default: Date.now()
     }
-
 })
 
-let Shop = mongoose.model("Shop", ShopSchema)
+let Shop = mongoose.model("Shop", shopSchema)
 
 module.exports = Shop

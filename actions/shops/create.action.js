@@ -7,21 +7,20 @@ class CreateShop {
         this.owner = req.body.owner
     }
 
-    async create() {
+    async exec() {
         try {
-        let query  = new Shop( {
-        name:this.name,
-        description:this.description,
-        owner:this.owner
-    })
-    await query.save()
+            let query = new Shop({
+                name: this.name,
+                description: this.description,
+                owner: this.owner
+            })
+            await query.save()
 
-    return query
-    }catch(err) {
-        throw err
+            return query
+        } catch(err) {
+            throw err
+        }
     }
-}
-
 }
 
 module.exports = CreateShop

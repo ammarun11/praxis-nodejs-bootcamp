@@ -2,16 +2,17 @@
  * User Schema
  */
 
-const mongoose = require('mongoose')
+const mongoose = require("mongoose")
 const Schema = mongoose.Schema
 
-let userSchema = new Schema ({
+let userSchema = new Schema({
     name: String,
     email: String,
     phone: Number,
+    password: String,
     created_at: {
-        type:Date,
-        default:Date.now
+        type: Date,
+        default: Date.now
     },
     updated_at: {
         type: Date,

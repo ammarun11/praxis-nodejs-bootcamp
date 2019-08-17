@@ -3,36 +3,19 @@ const router = express.Router()
 const Shop = require("../actions/shop.action")
 const ShowShop = require("../actions/shops/show.action")
 const CreateShop = require("../actions/shops/create.action")
-
-// router.post("/", async (req, res, next) => {
-//     try {
-//         let data = await Shop.create(req)
-
-//         return res.status(201).json({
-//             status: "success",
-//             data,
-//             message: "Shop created successfully"
-//         })
-//     } catch (err) {
-//         return res.status(400).json({
-//             status: "error",
-//             message: err.message
-//         })
-//     }
-// })
+const AllShop = require("../actions/shops/getAll.action")
+const UpdateShop = require("../actions/shops/update.action")
+const DeleteShop = require("../actions/shops/destroy.action")
 
 
 router.post("/", async (req, res, next) => {
-
     try {
-        let data = await new CreateShop(req).create()
+        let data = await new CreateShop(req).exec()
 
-        console.log(`Type of CreateShop is ${typeof CreateShop}`)
-        
-        return res.status(200).json({
+        return res.status(201).json({
             status: "success",
             data,
-            message: "User created successfully!"
+            message: "Shop created successfully"
         })
     } catch(err) {
         return res.status(400).json({
@@ -44,12 +27,12 @@ router.post("/", async (req, res, next) => {
 
 router.get("/", async (req, res, next) => {
     try {
-        let data = await Shop.all()
+        let data = await new AllShop().getAll()
 
-        return res.status(200).json({
+        return res.status(201).json({
             status: "success",
             data,
-            message: "Get all shop data"
+            message: "Show Data successfully"
         })
     } catch(err) {
         return res.status(400).json({
@@ -59,10 +42,64 @@ router.get("/", async (req, res, next) => {
     }
 })
 
+router.put("/:id", async (req, res, next) => {
+    try {   
+        let {id} = req.params
+        let data = await new UpdateShop(id, req).update()
+
+        return res.status(201).json({
+            status: "success",
+            data,
+            message: "Shop updated successfully"
+        })
+    } catch(err) {
+        return res.status(400).json({
+            status: "error",
+            message: err.message
+        })
+    }
+})
+
+router.delete("/:id", async (req, res, next) => {
+    try {   
+        let {id} = req.params
+        let data = await new DeleteShop(id).delete()
+
+        return res.status(201).json({
+            status: "success",
+            data,
+            message: "Shop updated successfully"
+        })
+    } catch(err) {
+        return res.status(400).json({
+            status: "error",
+            message: err.message
+        })
+    }
+})
+
+//Fungsi dengan class static
+// router.get("/", async (req, res, next) => {
+//     try {
+//         let data = await Shop.all()
+
+//         return res.status(200).json({
+//             status: "success",
+//             data,
+//             message: "Get all shop data"
+//         })
+//     } catch(err) {
+//         return res.status(400).json({
+//             status: "error",
+//             message: err.message
+//         })
+//     }
+// })
+
 router.get("/:id", async (req, res, next) => {
     try {
         let { id } = req.params
-        let data = await new ShowShop(id).show()
+        let data = await new ShowShop(id).exec()
         console.log(`Type of ShowShop is ${typeof ShowShop}`)
 
         return res.status(200).json({
@@ -77,6 +114,5 @@ router.get("/:id", async (req, res, next) => {
         })
     }
 })
-
 
 module.exports = router

@@ -1,6 +1,6 @@
-const ShopModel = require('../models/shop.model')
+const ShopModel = require("../models/shop.model")
 
-class Shop{
+class Shop {
     static async create(req) {
         try {
             let { name, description, owner } = req.body
@@ -13,7 +13,7 @@ class Shop{
             await data.save()
 
             return data
-        } catch (err) {
+        } catch(err) {
             throw err
         }
     }
@@ -21,17 +21,16 @@ class Shop{
     static async all() {
         try {
             let data = await ShopModel.find({}).exec()
+
             return data
         } catch(err) {
             throw err
         }
     }
+
     hello() {
         return 'Hello Shop!'
     }
-    
 }
 
 module.exports = Shop
-
-

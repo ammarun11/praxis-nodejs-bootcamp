@@ -1,24 +1,8 @@
-const User = require("../models/user")
-const {isInteger} = require("lodash")
+const User = require("../models/user.model")
 
 const create = async (req) => {
-    let {
-        name,
-        phone
-    } = req.body
-    
-    let email = req.body.email.toLowerCase()
-
+    let { name, email, phone } = req.body
     phone = parseInt(phone)
-    
-    if(isInteger(phone) === false) {
-        return "Wrong type of phone"
-    }
-    else if (name == parseInt(name)){
-        return "wrong type of name"
-    }
-    
-
     var insert_data = {
         name,
         email,
@@ -26,12 +10,12 @@ const create = async (req) => {
     }
 
     let data = new User(insert_data)
-    
+
     try {
         await data.save()
 
         return data
-    } catch (err) {
+    } catch(err) {
         throw err
     }
 }
@@ -39,16 +23,16 @@ const create = async (req) => {
 const getAll = async () => {
     try {
         let query = await User.find({}).exec()
-        let data = query.map((value, index) => {
+        let data = query.map((v, i) => {
             return {
-                _id:value.id,
-                name: value.name,
-                email: value.email,
-                phone: value.phone
+                name: v.name,
+                email: v.email,
+                phone: v.phone
             }
         })
+
         return data
-    } catch (err) {
+    } catch(err) {
         throw err
     }
 }
@@ -60,7 +44,41 @@ const getDetail = async (id) => {
         }).exec()
 
         return query
-    } catch (err) {
+    } catch(err) {
+        throw err
+    }
+}
+
+const update = async (id, updated_data) => {
+    let { name, email, phone, fresh } = updated_data
+    let opts = {
+        new: fresh === "true" ? true : false
+    }
+    let data = {
+        name,
+        email,
+        phone
+    }
+
+    try {
+        let query = await User.findOneAndUpdate({
+            _id: id
+        }, data, opts).exec()
+
+        return query
+    } catch(err) {
+        throw err
+    }
+}
+
+const destroy = async (id) => {
+    try {
+        let query = await User.findOneAndDelete({
+            _id: id
+        }).exec()
+
+        return query
+    } catch(err) {
         throw err
     }
 }
@@ -69,4 +87,6 @@ module.exports = {
     create,
     getAll,
     getDetail,
+    update,
+    destroy
 }
