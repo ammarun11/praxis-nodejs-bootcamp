@@ -13,7 +13,7 @@ class Login {
             let data = await User.find({
                 email : this.email
             }).exec()
-            console.log(data.length)
+
             if(data.length == 0) {
                 throw Error(" User Not Found")
             }
