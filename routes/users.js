@@ -81,6 +81,7 @@ router.get("/my-profile", async (req, res) => {
     }
 })
 
+
 router.get("/:id", async (req, res) => {
     try {
         let { id } = req.params
