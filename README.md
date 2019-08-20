@@ -1,3 +1,3 @@
 ##### Belajar NodeJS Di Praxis ACADEMY 
-- Day11
-- Database MongoDB, CRUD, Authentication with JWT (Json WEB Token), login & Registration , My-profile 
+- Day12
+- Database MongoDB, CRUD, Generate Token helper self, send Email with SendGrid, route reset-password via email token.
