@@ -15,7 +15,7 @@ module.exports = () => {
         // }
 
         if(token) {
-            jwt.verify(token, process.env.JWT_SECRET, (err, data) => {
+            jwt.verify(token, process.env.JWT_SECRET, (err,data) => {
                 if(err) return res.status(401).json(unauthenticated)
 
                 return next()
