@@ -2,7 +2,7 @@ const express = require('express')
 const router = express.Router()
 const moment = require("moment")
 const mongoose = require('mongoose')
-const SendMail = require("../actions/emails/send.action")
+const SendMailtrap = require("../actions/emails/send-mail-trap.action")
 
 router.get('/', (req, res) => {
     db_status = mongoose.connection.readyState
@@ -19,12 +19,12 @@ router.get('/', (req, res) => {
 router.post("/email", async (req, res) => {
     try {
         let { to, subject, text } = req.body
-        await new SendMail({
+        await new SendMailtrap({
             to: [to],
             subject,
             text,
             html:''
-        }).ngirimemail()
+        }).exec()
 
         return res.status(200).json({
             status: "Success",
@@ -38,6 +38,7 @@ router.post("/email", async (req, res) => {
     }
 })
 
-//palosendgrid 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
+
+
 
 module.exports = router

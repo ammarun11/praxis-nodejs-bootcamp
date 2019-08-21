@@ -20,6 +20,7 @@ const create = async (req) => {
     }
 }
 
+
 const getAll = async () => {
     try {
         let query = await User.find({}).exec()

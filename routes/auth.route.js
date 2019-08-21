@@ -5,9 +5,10 @@ const AllUser = require("../actions/users/getAll.action")
 const Login = require("../actions/users/login.action")
 const verifyToken = require("../middleware/verify_token.middleware")
 
-
 router.post("/register", async (req, res) => {
     try {
+
+
         let data = await new Register(req).register()
 
         return res.status(201).json({
@@ -42,6 +43,8 @@ router.post("/register", async (req, res) => {
 
 router.post("/login", async (req, res, next) => {
     try {
+
+
         let data = await new Login(req).login()
 
         return res.status(200).json({
@@ -56,6 +59,8 @@ router.post("/login", async (req, res, next) => {
         })
     }
 })
+
+
 
 
 

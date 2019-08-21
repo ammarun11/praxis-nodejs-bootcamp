@@ -1,7 +1,7 @@
 const User = require("../../models/user.model")
 const bcrypt = require("bcryptjs")
 const jwt = require("jsonwebtoken")
-
+const randomKey = require('../../lib/helper')
 class Login {
     constructor(req) {
         this.email = req.body.email,

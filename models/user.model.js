@@ -10,6 +10,7 @@ let userSchema = new Schema({
     email: String,
     phone: Number,
     password: String,
+    token: String,
     created_at: {
         type: Date,
         default: Date.now
